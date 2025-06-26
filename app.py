@@ -35,7 +35,7 @@ def calculate_ping_rate(depth):
 def calculate_hits_per_cell(swath, ping_rate, n_beams, speed, cell_size):
     density_across = n_beams / swath
     density_along = ping_rate / speed
-    return 0.4 * density_across * cell_size * density_along * cell_size
+    return 0.325 * density_across * cell_size * density_along * cell_size
 
 # Loop through opening angles from 140° to 5°
 results = []
