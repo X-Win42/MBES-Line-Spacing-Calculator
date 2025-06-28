@@ -17,51 +17,24 @@ hit_count_options = [1, 2, 3, 4, 5]
 beam_options = [512, 1024]
 speed_knots_options = [2, 3, 4, 5, 6]
 
-# User inputs
-depth = st.slider(
-    "🌊 Depth (m)",
-    min_value=0.0,
-    max_value=400.0,
-    value=20.0,
-    step=1.0,
-    help="Depth of the seafloor below the MBES transducer (in meters)"
-)
+# User inputs with visible descriptions
+st.markdown("**🌊 Depth (m)** ℹ️ Depth of the seafloor below the MBES transducer (in meters)")
+depth = st.slider(" ", min_value=0.0, max_value=400.0, value=20.0, step=1.0)
 
-cell_size = st.select_slider(
-    "📐 Cell size (m)",
-    options=cell_options,
-    value=0.5,
-    help="Size of each cell in the coverage grid where hit count is evaluated (in meters). If not specified, use: 0.5 m"
-)
+st.markdown("**📐 Cell size (m)** ℹ️ Size of each cell in the grid where hit count is evaluated. If not specified, use: 0.5 m")
+cell_size = st.select_slider(" ", options=cell_options, value=0.5)
 
-overlap = st.select_slider(
-    "🔁 Line overlap (%)",
-    options=overlap_options,
-    value=20,
-    help="Percentage of swath overlap between adjacent MBES survey lines. If not specified, use: 20%"
-)
+st.markdown("**🔁 Line overlap (%)** ℹ️ Percentage of swath overlap between adjacent lines. If not specified, use: 20%")
+overlap = st.select_slider(" ", options=overlap_options, value=20)
 
-hit_count_min = st.select_slider(
-    "🎯 Minimum hit count per cell",
-    options=hit_count_options,
-    value=3,
-    help="Minimum number of MBES soundings required per grid cell to consider it fully covered. If not specified, use: 3"
-)
+st.markdown("**🎯 Minimum hit count per cell** ℹ️ Minimum number of soundings per grid cell. If not specified, use: 3")
+hit_count_min = st.select_slider(" ", options=hit_count_options, value=3)
 
-n_beams = st.select_slider(
-    "🔢 Number of beams",
-    options=beam_options,
-    value=1024,
-    help="Total number of beams emitted by the MBES system per ping (typically 512 or 1024)"
-)
+st.markdown("**🔢 Number of beams** ℹ️ Total number of beams emitted per ping (typically 512 or 1024)")
+n_beams = st.select_slider(" ", options=beam_options, value=1024)
 
-speed_knots = st.select_slider(
-    "🚤 Acquisition speed (knots)",
-    options=speed_knots_options,
-    value=4,
-    help="Speed of the vessel during MBES data acquisition, in knots. If not specified, use: 4 knots"
-)
-
+st.markdown("**🚤 Acquisition speed (knots)** ℹ️ Vessel speed during MBES acquisition. If not specified, use: 4 knots")
+speed_knots = st.select_slider(" ", options=speed_knots_options, value=4)
 speed = speed_knots * KNOT_TO_MS
 
 # Ping rate estimation
