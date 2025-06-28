@@ -18,13 +18,50 @@ beam_options = [512, 1024]
 speed_knots_options = [2, 3, 4, 5, 6]
 
 # User inputs
-depth = st.slider("🌊 Depth (m)", min_value=0.0, max_value=400.0, value=20.0, step=1.0)
+depth = st.slider(
+    "🌊 Depth (m)",
+    min_value=0.0,
+    max_value=400.0,
+    value=20.0,
+    step=1.0,
+    help="Depth of the seafloor below the MBES transducer (in meters)"
+)
 
-cell_size = st.select_slider("📐 Cell size (m)", options=cell_options, value=1)
-overlap = st.select_slider("🔁 Line overlap (%)", options=overlap_options, value=10)
-hit_count_min = st.select_slider("🎯 Minimum hit count per cell", options=hit_count_options, value=5)
-n_beams = st.select_slider("🔢 Number of beams", options=beam_options, value=1024)
-speed_knots = st.select_slider("🚤 Acquisition speed (knots)", options=speed_knots_options, value=2)
+cell_size = st.select_slider(
+    "📐 Cell size (m)",
+    options=cell_options,
+    value=0.5,
+    help="Size of each cell in the coverage grid where hit count is evaluated (in meters). If not specified, use: 0.5 m"
+)
+
+overlap = st.select_slider(
+    "🔁 Line overlap (%)",
+    options=overlap_options,
+    value=20,
+    help="Percentage of swath overlap between adjacent MBES survey lines. If not specified, use: 20%"
+)
+
+hit_count_min = st.select_slider(
+    "🎯 Minimum hit count per cell",
+    options=hit_count_options,
+    value=3,
+    help="Minimum number of MBES soundings required per grid cell to consider it fully covered. If not specified, use: 3"
+)
+
+n_beams = st.select_slider(
+    "🔢 Number of beams",
+    options=beam_options,
+    value=1024,
+    help="Total number of beams emitted by the MBES system per ping (typically 512 or 1024)"
+)
+
+speed_knots = st.select_slider(
+    "🚤 Acquisition speed (knots)",
+    options=speed_knots_options,
+    value=4,
+    help="Speed of the vessel during MBES data acquisition, in knots. If not specified, use: 4 knots"
+)
+
 speed = speed_knots * KNOT_TO_MS
 
 # Ping rate estimation
